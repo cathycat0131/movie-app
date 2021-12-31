@@ -21,10 +21,12 @@ const App = () => {
       
     };
 
+    //Search movie
     useEffect(()=>{
       getMovieRequest(searchValue);
     },[searchValue]);
-
+  
+    //Fetch data from local storage
   useEffect(()=>{
     const movieFavourites = JSON.parse(
       localStorage.getItem('react-movie-app-favourites')
@@ -52,29 +54,32 @@ const App = () => {
       saveToLocalStorage(newFavouriteList);
   };
 
-    return ( < div className = 'container-fluid movie-app' >
-        <div className='row d-flex align-items-center mt-4 mb-4'>
+    return ( 
+    < div className = 'container-fluid movie-app' >
+        <div className='row d-flex align-items-center mt-4 mb-4' id='SearchMovie'>
           <MovieListHeading heading='Movies'></MovieListHeading>
           <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}></SearchBox>
         </div>
-        <div className = 'row'>
+        <div className ='row'>
           <MovieList 
           movies={movies} 
           handleFavouritesClick={addFavouriteMovie}
-          favouriteComponent={AddFavourite}>
+          favouriteComponent={AddFavourite}
+          >
           </MovieList>
-        </div> 
+        </div>
+        <br></br><br></br><br></br>
         <div className='row d-flex align-items-center mt-4 mb-4'>
           <MovieListHeading heading='Favourites'></MovieListHeading>
-        </div>
+          </div>
         <div className = 'row'>
           <MovieList 
           movies={favourites} 
           handleFavouritesClick={removeFavouriteMovie} 
-          favouriteComponent={RemoveFavourite}>
-
+          favouriteComponent={RemoveFavourite}
+          >
           </MovieList>
-        </div> 
+        </div>
         </div >
     );
 };
