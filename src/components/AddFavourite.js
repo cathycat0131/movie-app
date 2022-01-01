@@ -3,10 +3,10 @@ import React from 'react';
 const AddFavourite =()=>{
     return(
         <>
-        <span className='mr-2'>Add to Favourite</span>
+        <span className=''>Add to Favourite </span>
         <svg
 				width='1em'
-				height='1em'
+				height='0.8em'
 				viewBox='0 0 16 16'
 				class='bi bi-heart-fill'
 				fill='red'

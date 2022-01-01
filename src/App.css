@@ -6,6 +6,7 @@ body {
 
 .movie-app .row {
     overflow-x: auto;
+    overflow-y: hidden;
     flex-wrap: nowrap;
 }
 
@@ -16,7 +17,7 @@ body {
 
 .image-container:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.0);
 }
 
 .image-container:hover .overlay {
