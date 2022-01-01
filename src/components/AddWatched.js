@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const AddWatched =()=>{
+
+class AddWatched extends Component{
+    render() {
     return(
         <>
         <span className=''>Add to Watched </span>
@@ -14,6 +16,7 @@ const AddWatched =()=>{
 </svg>
         </>
     )
+}
 }
 
 export default AddWatched;

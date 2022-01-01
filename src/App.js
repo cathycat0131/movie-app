@@ -3,7 +3,7 @@ import './bootstrap.min.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import MovieList from './components/MovieList';
-// import {Heading} from './components/Unused/Heading';
+import {Heading} from './components/Unused/Heading';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddFavourite from './components/AddFavourite';
@@ -12,10 +12,9 @@ import AddWatched from './components/AddWatched';
 import RemoveWatched from './components/RemoveWatched';
 import RemoveWatchlist from './components/RemoveWatchlist';
 import RemoveFavourite from './components/RemoveFavourite';
-// import {Watchlist} from './components/Watchlist';
-// import Add from './components/Add';
-// import {Watched} from './components/Watched';
-// import { Link } from 'react-router-dom';
+import {Watchlist} from './components/Unused/Watchlist';
+import Add from './components/Unused/Add';
+import {Watched} from './components/Unused/Watched';
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -78,13 +77,13 @@ const App = () => {
 
   //Add to Favourite, Watchlist, Watched
   const addFavouriteMovie = (movie) =>{
-    const newFavouriteList = [...favourites,movie];
+    const newFavouriteList = [movie,...favourites];
     setFavourites(newFavouriteList);
     saveToLocalStorageFavourite(newFavouriteList);
   };
 
   const addToWatchlist = (movie) =>{
-    const newWatchlist = [...watchlist,movie];
+    const newWatchlist = [movie,...watchlist,];
     setWatchlist(newWatchlist);
     saveToLocalStorageWatchlist(newWatchlist);
   }
@@ -107,7 +106,7 @@ const App = () => {
       saveToLocalStorageWatchlist(newWatchlist);
 
       //Add to watched
-      const newWatched= [...watched,movie];
+      const newWatched= [movie,...watched];
       setWatched(newWatched);
       saveToLocalStorageWatched(newWatched);
   };
@@ -130,53 +129,32 @@ const App = () => {
 
     //Render
     return ( 
-      
-      // <Router>
-      //   <Heading></Heading>
-      //   <>
-      //     <Route exact path="/">
-      //       <Watchlist/>
-      //     </Route>
-      //     <Route path="/Watched">
-      //       <Watched/>
-      //     </Route>
-      //     <Route path="/Add">
-      //       <Add/>
-      //     </Route>
-      //   </>
-      // </Router>
-      <>
-    
-    
-    <div className = 'container-fluid movie-app' >
-      
-
-        <div className='row d-flex align-items-center mt-4 mb-4' id='SearchMovie'>
-          <MovieListHeading heading='Movies App'>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
-  <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-  <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-  <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"/>
-</svg>
-          </MovieListHeading>
-          
-          
-          <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}></SearchBox>
-        </div>
+        <>
         
-        {/* <ul className='nav-links'>
-                <li>
-                    <h2>Watch List</h2>
-                </li>
-                <li>
-                    <h2>Watched</h2>
-                </li>
-                <li>
-                    <h2>Search</h2>
-                </li>
-      </ul> */}
-
-        <div className ='row'>
+    <div className = 'container-fluid' >
+        <div className='d-flex align-items-center justify-content-center'>
+          <div className='p-2'>
+          <MovieListHeading heading='Movies App '>
+          </MovieListHeading>
+          </div>
+          <div className='p-2'>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
+          <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+          <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+          <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"/>
+          </svg>
+          </div>
+          </div>
+          <div className='d-flex justify-content-between align-items-center'>
+          <div class="">
+            <MovieListHeading heading='Search Results'></MovieListHeading>
+            <h3>{movies.length}{movies.length == 1 ? " Movie" : " Movies"}</h3>
+          </div>
+          <div class=""><SearchBox searchValue={searchValue} setSearchValue={setSearchValue}></SearchBox></div>
+          
+          </div>
+        <>
+        <div className ='row movie-app'>
           <MovieList 
           movies={movies} 
           handleFavouritesClick={addFavouriteMovie}
@@ -187,11 +165,11 @@ const App = () => {
           </MovieList>
         </div>
         <br></br><br></br><br></br>
-        <div className='row d-flex align-items-center mt-4 mb-4'>
+        <div className='row d-flex align-items-center'>
           <MovieListHeading heading='Favourites'></MovieListHeading>
           <h3>{favourites.length}{favourites.length == 1 ? " Movie" : " Movies"}</h3>
           </div>
-        <div className = 'row'>
+        <div className = 'row movie-app'>
           <MovieList 
           movies={favourites} 
           handleFavouritesClick={removeFavouriteMovie} 
@@ -202,30 +180,30 @@ const App = () => {
           </MovieList>
           
         </div>
-        
-        <div className='row d-flex align-items-center mt-4 mb-4'>
+        <br></br><br></br><br></br>
+        <div className='row d-flex align-items-center'>
           <MovieListHeading heading='Watchlist'></MovieListHeading>
           <h3>{watchlist.length}{watchlist.length == 1 ? " Movie" : " Movies"}</h3>
           </div>
-        <div className = 'row'>
+        <div className = 'row movie-app'>
           <MovieList 
           movies={watchlist} 
           handleWatchlistClick={removeFromWatchlist}
           handleWatchedClick={addToWatched}
           handleFavouritesClick={addFavouriteMovie}
-          favouriteComponent={AddFavourite}
+          favouriteComponent={AddWatchlist}
           watchlistComponent={RemoveWatchlist}
           watchedComponent={AddWatched}
           >
           </MovieList>
         </div>
-
-        <div className='row d-flex align-items-center mt-4 mb-4'>
-          <MovieListHeading heading='Watched'></MovieListHeading>
+        <br></br><br></br><br></br>
+        <div className='row d-flex align-items-center'>
+          <MovieListHeading heading='Watched' id='watched'></MovieListHeading>
           
           <h3>{watched.length}{watched.length == 1 ? " Movie" : " Movies"}</h3>
           </div>
-        <div className = 'row'>
+        <div className = 'row movie-app'>
           <MovieList 
           movies={watched} 
           handleWatchedClick={removeFromWatched}
@@ -236,6 +214,7 @@ const App = () => {
           >
           </MovieList>
         </div>
+        </>
         </div >
         </>
     );

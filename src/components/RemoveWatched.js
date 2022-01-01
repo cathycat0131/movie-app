@@ -3,7 +3,7 @@ import React from 'react';
 const RemoveWatched =()=>{
     return(
         <>
-        <span className='mr-2'>Remove from Watched </span>
+        <span className='mr-2'>Remove from favourite  </span>
         <svg
 				width='1em'
 				height='0.8em'

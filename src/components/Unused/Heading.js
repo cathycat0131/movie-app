@@ -14,7 +14,7 @@ export const Heading = () => {
                     <Link to="/">Watch List</Link>
                 </li>
                 <li>
-                    <Link to="/Watched">Watched</Link>
+                    <Link to="/watched">Watched</Link>
                 </li>
                 <li>
                     <Link to="/Add" className='btn'>+ Add</Link>
