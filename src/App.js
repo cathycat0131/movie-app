@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './bootstrap.min.css';
-import { BrowserRouter as Router,Switch,Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import MovieList from './components/MovieList';
-import {Heading} from './components/Unused/Heading';
+// import {Heading} from './components/Unused/Heading';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddFavourite from './components/AddFavourite';
@@ -39,29 +39,54 @@ const App = () => {
     },[searchValue]);
   
     //Fetch data from local storage
-  useEffect(()=>{
-    const movieFavourites = JSON.parse(
-      localStorage.getItem('react-movie-app')
+    useEffect(()=>{
+    const movieFavourite = JSON.parse(
+      localStorage.getItem('react-movie-favourite')
     );
-    if (movieFavourites) {
-			setFavourites(movieFavourites);
+    const movieWatchlist= JSON.parse(
+      localStorage.getItem('react-movie-watchlist')
+    );
+    const movieWatched= JSON.parse(
+      localStorage.getItem('react-movie-watched')
+    );
+    if (movieWatched) {
+      setWatched(movieWatched);
+		}
+    if (movieFavourite) {
+			setFavourites(movieFavourite);
+		}
+    if (movieWatchlist) {
+      setWatchlist(movieWatchlist)
 		}
   },[]);
 
-  const saveToLocalStorage = (items) =>{
-    localStorage.setItem('react-movie-app',
+  //Save to local storage
+  const saveToLocalStorageFavourite = (items) =>{
+    localStorage.setItem('react-movie-favourite',
     JSON.stringify(items));
   }
+
+  const saveToLocalStorageWatchlist= (items) =>{
+    localStorage.setItem('react-movie-watchlist',
+    JSON.stringify(items));
+  }
+
+  const saveToLocalStorageWatched = (items) =>{
+    localStorage.setItem('react-movie-watched',
+    JSON.stringify(items));
+  }
+
+  //Add to Favourite, Watchlist, Watched
   const addFavouriteMovie = (movie) =>{
     const newFavouriteList = [...favourites,movie];
     setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
+    saveToLocalStorageFavourite(newFavouriteList);
   };
 
-  const addToWatchList = (movie) =>{
+  const addToWatchlist = (movie) =>{
     const newWatchlist = [...watchlist,movie];
     setWatchlist(newWatchlist);
-    saveToLocalStorage(newWatchlist);
+    saveToLocalStorageWatchlist(newWatchlist);
   }
 
   const removeFromWatchlist = (movie)=>{
@@ -70,7 +95,7 @@ const App = () => {
       (watchlist) => watchlist.imdbID !== movie.imdbID);
 
       setWatchlist(newWatchlist);
-      saveToLocalStorage(newWatchlist);
+      saveToLocalStorageWatchlist(newWatchlist);
   }
 
   const addToWatched = (movie) =>{
@@ -79,19 +104,19 @@ const App = () => {
       (watchlist) => watchlist.imdbID !== movie.imdbID);
 
       setWatchlist(newWatchlist);
-      saveToLocalStorage(newWatchlist);
-      
+      saveToLocalStorageWatchlist(newWatchlist);
+
       //Add to watched
       const newWatched= [...watched,movie];
       setWatched(newWatched);
-      saveToLocalStorage(newWatched);
+      saveToLocalStorageWatched(newWatched);
   };
 
   const removeFromWatched = (movie)=>{
     const newWatched = watched.filter(
       (watched) => watched.imdbID !== movie.imdbID)
       setWatched(newWatched);
-      saveToLocalStorage(newWatched);
+      saveToLocalStorageWatched(newWatched);
   }
 
   const removeFavouriteMovie = (movie) =>{
@@ -99,9 +124,11 @@ const App = () => {
       (favourite) => favourite.imdbID !== movie.imdbID);
 
       setFavourites(newFavouriteList);
-      saveToLocalStorage(newFavouriteList);
+      saveToLocalStorageFavourite(newFavouriteList);
   };
 
+
+    //Render
     return ( 
       
       // <Router>
@@ -118,7 +145,8 @@ const App = () => {
       //     </Route>
       //   </>
       // </Router>
-
+      <>
+      
     <div className = 'container-fluid movie-app' >
       
 
@@ -143,7 +171,7 @@ const App = () => {
           <MovieList 
           movies={movies} 
           handleFavouritesClick={addFavouriteMovie}
-          handleWatchlistClick={addToWatchList}
+          handleWatchlistClick={addToWatchlist}
           favouriteComponent={AddFavourite}
           watchlistComponent={AddWatchlist}
           >
@@ -159,6 +187,7 @@ const App = () => {
           handleFavouritesClick={removeFavouriteMovie} 
           favouriteComponent={RemoveFavourite}
           handleWatchedClick={addToWatched}
+          handleWatchlistClick={addToWatchlist}
           >
           </MovieList>
         </div>
@@ -185,14 +214,16 @@ const App = () => {
         <div className = 'row'>
           <MovieList 
           movies={watched} 
-          handleWatchlistClick={removeFromWatched}
+          handleWatchedClick={removeFromWatched}
           handleFavouritesClick={addFavouriteMovie}
           favouriteComponent={AddFavourite}
+          watchlistComponent={removeFromWatchlist}
           watchedComponent={RemoveWatched}
           >
           </MovieList>
         </div>
         </div >
+        </>
     );
 };
 export default App;

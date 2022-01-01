@@ -38,11 +38,13 @@ const MovieList = (props) => {
                     onClick={() => props.handleWatchlistClick(movie)}
                     className='align-items-center justify-content-center col-12'>
                         <h2 >Add to watchlist</h2>
+						<watchlistComponent/>
                     </div> 
 					<div 
                     onClick={() => props.handleWatchedClick(movie)}
                     className='align-items-center justify-content-center col-12'>
                         <h2 >Add to watched</h2>
+						<watchedComponent/>
                     </div>
 					</div>
 				
