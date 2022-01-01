@@ -146,12 +146,21 @@ const App = () => {
       //   </>
       // </Router>
       <>
-      
+    
+    
     <div className = 'container-fluid movie-app' >
       
 
         <div className='row d-flex align-items-center mt-4 mb-4' id='SearchMovie'>
-          <MovieListHeading heading='Movies App'></MovieListHeading>
+          <MovieListHeading heading='Movies App'>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
+  <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+  <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"/>
+</svg>
+          </MovieListHeading>
+          
+          
           <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}></SearchBox>
         </div>
         
@@ -180,6 +189,7 @@ const App = () => {
         <br></br><br></br><br></br>
         <div className='row d-flex align-items-center mt-4 mb-4'>
           <MovieListHeading heading='Favourites'></MovieListHeading>
+          <h3>{favourites.length}{favourites.length == 1 ? " Movie" : " Movies"}</h3>
           </div>
         <div className = 'row'>
           <MovieList 
@@ -190,10 +200,12 @@ const App = () => {
           handleWatchlistClick={addToWatchlist}
           >
           </MovieList>
+          
         </div>
-
+        
         <div className='row d-flex align-items-center mt-4 mb-4'>
           <MovieListHeading heading='Watchlist'></MovieListHeading>
+          <h3>{watchlist.length}{watchlist.length == 1 ? " Movie" : " Movies"}</h3>
           </div>
         <div className = 'row'>
           <MovieList 
@@ -210,6 +222,8 @@ const App = () => {
 
         <div className='row d-flex align-items-center mt-4 mb-4'>
           <MovieListHeading heading='Watched'></MovieListHeading>
+          
+          <h3>{watched.length}{watched.length == 1 ? " Movie" : " Movies"}</h3>
           </div>
         <div className = 'row'>
           <MovieList 

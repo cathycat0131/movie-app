@@ -1,4 +1,5 @@
 import React from 'react';
+import '../bootstrap.min.css';
 
 const MovieList = (props) => {
     const FavouriteComponent = props.favouriteComponent;
@@ -8,7 +9,8 @@ const MovieList = (props) => {
 		<>
 			{props.movies.map((movie, index) => (
 				<>
-				<div className='image-container justify-content-start col-3'>
+				
+				<div className='image-container justify-content-start col-sm-4'>
 					<img src={movie.Poster} alt='movie' width='auto' className=''></img>
                 
 					{/* <div className='row'>
@@ -37,14 +39,16 @@ const MovieList = (props) => {
 					<div 
                     onClick={() => props.handleWatchlistClick(movie)}
                     className='align-items-center justify-content-center col-12'>
-                        <h2 >Add to watchlist</h2>
-						<watchlistComponent/>
+                        {/* Add to watchlist */}
+						<FavouriteComponent></FavouriteComponent>
+						{/* <watchlistComponent/> */}
                     </div> 
 					<div 
                     onClick={() => props.handleWatchedClick(movie)}
                     className='align-items-center justify-content-center col-12'>
-                        <h2 >Add to watched</h2>
-						<watchedComponent/>
+                        {/* Add to watched
+						<watchedComponent/> */}
+						<FavouriteComponent></FavouriteComponent>
                     </div>
 					</div>
 				
