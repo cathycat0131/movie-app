@@ -191,7 +191,7 @@ const App = () => {
           handleWatchlistClick={removeFromWatchlist}
           handleWatchedClick={addToWatched}
           handleFavouritesClick={addFavouriteMovie}
-          favouriteComponent={AddWatchlist}
+          favouriteComponent={AddFavourite}
           watchlistComponent={RemoveWatchlist}
           watchedComponent={AddWatched}
           >
