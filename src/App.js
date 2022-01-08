@@ -134,7 +134,7 @@ const App = () => {
     <div className = 'container-fluid' >
         <div className='d-flex align-items-center justify-content-center'>
           <div className='p-2'>
-          <MovieListHeading heading='Movies App '>
+          <MovieListHeading heading='CineList'>
           </MovieListHeading>
           </div>
           <div className='p-2'>
