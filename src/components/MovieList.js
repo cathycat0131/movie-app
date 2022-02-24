@@ -12,6 +12,7 @@ const MovieList = (props) => {
 				<>
 				
 				<div className='image-container col'>
+					<h4 className='align-items-center'>{movie.Title}</h4>
 					<img src={movie.Poster} alt='movie' key={movie.imdbID} className='movie-poster'></img>
 					<div className='overlay align-items-center'>
 					<div 
@@ -43,5 +44,7 @@ const MovieList = (props) => {
 		</>
 	);
 };
-
 export default MovieList;
+
+
+

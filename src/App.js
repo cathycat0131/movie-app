@@ -3,6 +3,8 @@ import './bootstrap.min.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import MovieList from './components/MovieList';
+import Modal, { ModalBody, ModalFooter, ModalHeader} from './components/Modal';
+import Button from './components/Button';
 import {Heading} from './components/Unused/Heading';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
@@ -17,6 +19,7 @@ import Add from './components/Unused/Add';
 import {Watched} from './components/Unused/Watched';
 
 const App = () => {
+    const [showModal, setShowModal] = useState(false);
     const [movies, setMovies] = useState([]);
     const [favourites,setFavourites] = useState([]);
     const [watched, setWatched] = useState([])
@@ -126,11 +129,9 @@ const App = () => {
       saveToLocalStorageFavourite(newFavouriteList);
   };
 
-
     //Render
     return ( 
         <>
-        
     <div className = 'container-fluid' >
         <div className='d-flex align-items-center justify-content-center'>
           <div className='p-2'>
@@ -154,6 +155,31 @@ const App = () => {
           
           </div>
         <>
+        <div>
+            <Button onClick={() => setShowModal(true)}>
+                More
+            </Button>
+            
+            <Modal
+                show={showModal}
+                setShow={setShowModal}
+            // hideCloseButton
+            >
+                <ModalHeader>
+                    <h2>Modal header</h2>
+                </ModalHeader>
+                <ModalBody>
+                    <p style={{ textAlign: 'justify' }}>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maxime dolorem asperiores laboriosam ad delectus ea. Tempora tempore repellendus laudantium fugiat saepe mollitia eius illo possimus laborum consequuntur, tenetur neque.
+                    </p>
+                </ModalBody>
+                <ModalFooter>
+                    <Button onClick={() => setShowModal(false)}>
+                        Close
+                    </Button>
+                </ModalFooter>
+            </Modal>
+        </div>
         <div className ='row movie-app'>
           <MovieList 
           movies={movies} 
@@ -163,6 +189,7 @@ const App = () => {
           watchlistComponent={AddWatchlist}
           >
           </MovieList>
+          
         </div>
         <br></br><br></br><br></br>
         <div className='row d-flex align-items-center'>
